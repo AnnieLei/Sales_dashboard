@@ -6,10 +6,6 @@ Created on Thu Apr 21 13:47:25 2022
 https://www.youtube.com/watch?v=Sb0A9i6d320&t=466s
 https://github.com/Sven-Bo/streamlit-sales-dashboard
 """
-import os
-os.getcwd()
-#os.chdir()
-
 
 import pandas as pd
 import plotly.express as px
@@ -20,11 +16,15 @@ st.set_page_config(page_title=('Sales Dashboard'),
                    page_icon=':bar_chart:',
                    layout='wide'
 )
+
 @st.cache
 def get_data_from_excle():
-    df=pd.read_excel('supermarkt_sales1.xlsx',header=0,sheet_name='Sales')
+    #df=pd.read_excel('supermarkt_sales1.xlsx',header=0,sheet_name='Sales')
+    df=pd.read_csv('sales.csv')
+    df["hour"]=df["Time"].str.split(":")
+    df["hour"]=df["Time"].str.split(":", expand=True)
 
-    df["hour"]=pd.to_datetime(df["Time"],format="%H:%M:%S").dt.hour
+    #df["hour"]=pd.to_datetime(df["Time"],format="%H:%M:").dt.hour
     return df
 
 df=get_data_from_excle()
@@ -111,7 +111,7 @@ fig_product_sales.update_layout(
 sales_by_hour=(
     df_selection.groupby(by=["hour"]).sum()[["Total"]]
     )
-
+df_selection.info()
 fig_hourly_sales=px.bar(
     sales_by_hour,
     y="Total",
@@ -152,6 +152,3 @@ st.markdown('<p class="font">Wonder what the data looks like?</p>', unsafe_allow
 
 
 st.dataframe(df_selection)
-
-#t=dict(showgrid=False)
-
