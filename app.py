@@ -144,6 +144,15 @@ hide_st_style="""
 
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
+dfdsc=df_selection.describe()
+st.markdown(""" <style> .font {
+font-size:30px ; font-family: 'Cooper Black'; color: #FF9633;} 
+</style> """, unsafe_allow_html=True)
+st.markdown('<p class="font">Give me a glance</p>', unsafe_allow_html=True)
+
+
+st.dataframe(dfdsc)
+
 #https://python.plainenglish.io/three-tips-to-improve-your-streamlit-app-a4c94b4d2b30
 st.markdown(""" <style> .font {
 font-size:30px ; font-family: 'Cooper Black'; color: #FF9633;} 
