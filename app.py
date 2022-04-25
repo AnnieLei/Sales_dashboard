@@ -162,4 +162,16 @@ st.markdown('<p class="font">Wonder what the data looks like?</p>', unsafe_allow
 
 st.dataframe(df_selection)
 
+def convert_df(dfx):
+     # IMPORTANT: Cache the conversion to prevent computation on every rerun
+     return dfx.to_csv().encode('utf-8')
+
+csv = convert_df(df_selection)
+
+st.download_button(
+     label="Download data as CSV",
+     data=csv,
+     file_name='salesx.csv',
+     mime='text/csv',
+ )
 
