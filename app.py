@@ -161,3 +161,9 @@ st.markdown('<p class="font">Wonder what the data looks like?</p>', unsafe_allow
 
 
 st.dataframe(df_selection)
+st.download_button(
+     label="Download data as CSV",
+     data=df_selection,
+     file_name='large_df.csv',
+     mime='text/csv',
+ )
